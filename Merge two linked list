@@ -1,0 +1,139 @@
+#include<iostream>
+using namespace std;
+
+struct node
+{
+    int data;
+    node *next;
+};
+node *head1=NULL;
+node *head2=NULL;
+
+node* getnode()
+{
+    int data1;
+    node* newnode=new node;
+    cout<<"Enter data : ";
+    cin>>data1;
+    newnode->data=data1;
+    newnode->next=NULL;
+}
+
+//Create Slinked lidt
+
+node* createlist(node *head,int n)
+{
+    node *newnode,*temp;
+    for(int i=0;i<n;i++)
+    {
+    newnode=getnode();
+    temp=head;
+    if(head==NULL)
+    {
+        head=newnode;
+    }
+    else{
+    while(temp->next!=NULL)
+    {
+
+    temp=temp->next;
+    }
+    temp->next=newnode;
+    }
+    }
+    cout<<"Elements are Inserted Successfully. "<<endl;
+    return head;
+}
+
+
+//find length
+int length(node *head)
+{
+    node *temp;
+    int l=0;
+   temp=head;
+   if(head==NULL)
+   {
+       return 0;
+   }
+   else
+   {
+
+       while(temp!=NULL)
+       {
+           l++;
+           temp=temp->next;
+       }
+
+return l;
+   }
+
+}
+
+
+//Displaying linked list
+void display(node *head)
+{
+   node *temp;
+   temp=head;
+   if(head==NULL)
+   {
+       cout<<"Linklist is Empty "<<endl;
+   }
+   else
+   {
+       cout<<"Linked List Elements Are : "<<endl;
+       while(temp!=NULL)
+       {
+           cout<<temp->data<<" -> ";
+           temp=temp->next;
+       }
+       cout<<endl;
+
+   }
+}
+node* mergepoint(node *head1,node *head2)
+{
+    node *temp;
+
+    while(head1!=NULL)
+    {
+
+        temp=head2;
+        while(temp!=NULL)
+        {
+
+            if(temp->data==head1->data)
+            {
+
+                return head1;
+            }
+            temp=temp->next;
+        }
+        head1=head1->next;
+    }
+    return NULL;
+
+}
+
+
+int main()
+{
+    int n,k;
+    cout<<"Enter no. of nodes in 1st List : ";
+    cin>>n;
+    node* h1=createlist(head1,n);
+    cout<<"Enter no. of nodes in 2nd List : ";
+    cin>>k;
+    node *h2=createlist(head2,k);
+    display(h1);
+    display(h2);
+node *ans=mergepoint(h1,h2);
+if(ans  )
+cout<<"Merging point of two list is : "<<ans->data;
+else
+    cout<<"No Merging point  ";
+
+}
+
+
